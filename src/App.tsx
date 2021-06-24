@@ -1,14 +1,14 @@
 import React from 'react';
 import './App.css';
-import {Header} from "./components/Header";
-import {Navbar} from "./components/Navbar";
-import {Profile} from "./components/Profile";
+import {Header} from "./components/Header/Header";
+import {Navbar} from "./components/Navbar/Navbar";
+import {Profile} from "./components/Profile/Profile";
 
 
 const images = {
     img01: 'https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png',
-    img02: 'https://www.iphones.ru/wp-content/uploads/2019/08/kubik_rubik-000_resize.jpg',
-    img03: 'https://lh3.googleusercontent.com/proxy/8nqd4mYCEgxy57Lf0C_URtLc9o3G5EKBCVRNh-ZQQiZi4XUNdPk_rJk4HrC81AZYO1cSRXUYiZPvKt5KH5E4Pg',
+    img02: 'https://interier-foto.ru/wp-content/uploads/dlinnye-foto-4.jpg',
+    img03: 'https://popugai.info/wp-content/uploads/2015/01/korella-285x300.jpg',
 }
 
 const links = {

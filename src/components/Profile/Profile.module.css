@@ -1,0 +1,19 @@
+.content {
+    grid-area: c;
+    background-color: #fff
+}
+.main {
+    display: flex;
+    flex-direction: row;
+}
+.imgHead {
+    max-width: 850px;
+}
+
+.imgProfile {
+    max-width: 250px;
+}
+
+.description {
+margin: 30px 50px;
+}

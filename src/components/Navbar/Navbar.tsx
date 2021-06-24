@@ -1,4 +1,6 @@
 import React from "react";
+import style from "./Navbar.module.css"
+
 
 type PropsTypeAll = {
     linkProfile: string
@@ -10,21 +12,21 @@ type PropsTypeAll = {
 
 
 export const Navbar = (props: PropsTypeAll) => {
-    return (<nav className={'nav'}>
-        <div className={'item'}>
-            <a href={'s#'}>{props.linkProfile}</a>
+    return (<nav className={style.nav}>
+        <div className={style.item}>
+            <a className={style.active} href={'s#'}>{props.linkProfile}</a>
         </div>
-        <div className={'item'}>
+        <div className={style.item}>
             <a href={'s#'}>{props.linkMessages}</a>
         </div>
-        <div className={'item'}>
+        <div className={style.item}>
             <a href={'s#'}>{props.linkNews}</a>
         </div>
-        <div className={'item'}>
+        <div className={style.item}>
             <a href={'s#'}>{props.linkMusic}</a>
         </div>
 
-        <div className={'item'}>
+        <div className={style.item}>
             <a href={'s#'}>{props.linkSet}</a>
         </div>
     </nav>)

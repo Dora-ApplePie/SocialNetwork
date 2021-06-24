@@ -1,0 +1,20 @@
+.nav {
+    grid-area: n;
+    background-color: #1499ff;
+}
+a {
+    color: azure;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.item {
+    color: azure;
+    margin: 10px 20px;
+}
+
+.active {
+    color: #ffdc14;
+}
+
