@@ -1,13 +1,18 @@
 import React from "react";
 
-export const Profile = () => {
+type PropsTypeGen = {
+    imgProfile01: string
+    imgProfile02: string
+}
+
+export const Profile = (props: PropsTypeGen) => {
     return (
         <div className={'content'}>
             <div><img alt={'head-img'}
-                      src={'https://www.iphones.ru/wp-content/uploads/2019/08/kubik_rubik-000_resize.jpg'}/></div>
+                      src={props.imgProfile01}/></div>
 
             <div><img alt={'ava'}
-                      src={'https://lh3.googleusercontent.com/proxy/8nqd4mYCEgxy57Lf0C_URtLc9o3G5EKBCVRNh-ZQQiZi4XUNdPk_rJk4HrC81AZYO1cSRXUYiZPvKt5KH5E4Pg'}/>ava+description
+                      src={props.imgProfile02}/>ava+description
             </div>
             <div>
                 MyPosts

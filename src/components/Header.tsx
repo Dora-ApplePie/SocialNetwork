@@ -1,10 +1,14 @@
 import React from 'react';
 
-export const Header = () => {
+type PropsTypeGen = {
+    imgHeader: string
+}
+
+export const Header = (props: PropsTypeGen) => {
     return (
         <header className={'header'}>
-            <img alt={'Logo-img'}
-                 src={'https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png'}/>
+            <img alt={'Logo'}
+                 src={props.imgHeader}/>
         </header>
     )
 }
