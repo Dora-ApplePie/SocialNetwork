@@ -5,6 +5,7 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 
 
+
 const images = {
     img01: 'https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png',
     img02: 'https://interier-foto.ru/wp-content/uploads/dlinnye-foto-4.jpg',
@@ -32,6 +33,7 @@ const App = () => {
 
             <Profile imgProfile01={images.img02}
                      imgProfile02={images.img03}/>
+
         </div>
     );
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Profile.module.css"
+import {MyPosts} from "./MyPosts/MyPosts";
 
 type PropsTypeGen = {
     imgProfile01: string
@@ -24,15 +25,7 @@ export const Profile = (props: PropsTypeGen) => {
                     <p>Mobile: +375(29)236-64-04</p>
                 </div>
             </div>
-            <div className={style.title}>
-                <h2>MyPosts</h2>
-                <input placeholder={'Your news...'}/>
-                <input type={'button'}/>
-            </div>
-            <div className={style.posts}>
-                <div className={style.item}><p>Hey!</p></div>
-                <div className={style.item}><p>It's our new program!</p></div>
-            </div>
+            <MyPosts/>
         </div>
     )
 }
