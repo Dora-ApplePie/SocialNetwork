@@ -1,33 +1,33 @@
 import React from "react";
 import style from "./Navbar.module.css"
+import {NavLink} from 'react-router-dom';
+import {NavbarType} from "../../redux/state";
 
 
-type PropsTypeAll = {
-    linkProfile: string
-    linkMessages: string
-    linkNews: string
-    linkMusic: string
-    linkSet: string
+
+type PropsType= {
+    navbar: NavbarType
 }
 
+export const Navbar: React.FC <PropsType> = (props) => {
 
-export const Navbar = (props: PropsTypeAll) => {
+
     return (<nav className={style.nav}>
         <div className={style.item}>
-            <a className={style.active} href={'s#'}>{props.linkProfile}</a>
+            <NavLink activeClassName={style.active} to={'/profile'}>{props.navbar.profileLink}</NavLink>
         </div>
         <div className={style.item}>
-            <a href={'s#'}>{props.linkMessages}</a>
+            <NavLink activeClassName={style.active} to={'/dialogs'}>{props.navbar.messagesLink}</NavLink>
         </div>
         <div className={style.item}>
-            <a href={'s#'}>{props.linkNews}</a>
+            <NavLink activeClassName={style.active} to={'/feed'}>{props.navbar.newsLink}</NavLink>
         </div>
         <div className={style.item}>
-            <a href={'s#'}>{props.linkMusic}</a>
+            <NavLink activeClassName={style.active} to={'/music'}>{props.navbar.musicLink}</NavLink>
         </div>
 
         <div className={style.item}>
-            <a href={'s#'}>{props.linkSet}</a>
+            <NavLink activeClassName={style.active} to={'/settings'}>{props.navbar.musicLink}</NavLink>
         </div>
     </nav>)
 }

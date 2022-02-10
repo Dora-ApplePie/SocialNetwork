@@ -1,0 +1,17 @@
+.main {
+    display: flex;
+    flex-direction: row;
+}
+.imgHead {
+    width: 830px;
+    max-height: 300px;
+}
+
+.imgProfile {
+    margin: 5px 8px;
+    min-width: 270px;
+}
+
+.description {
+    margin: 30px 50px;
+}

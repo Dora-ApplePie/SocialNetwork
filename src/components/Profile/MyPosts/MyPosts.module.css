@@ -1,0 +1,9 @@
+.myPosts {
+    margin-left: 12px;
+}
+
+button {
+    display: flex;
+    background-color: #d30a0a;
+    border: none;
+}

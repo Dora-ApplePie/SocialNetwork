@@ -3,38 +3,39 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
+import Dialogs from "./components/Dialogs/Dialogs";
+import {BrowserRouter, Route} from 'react-router-dom';
+import {News} from "./components/News/News";
+import {Music} from "./components/Music/Music";
+import {Settings} from "./components/Setting/Settings";
+import {RootStateType} from "./redux/state";
 
 
-
-const images = {
-    img01: 'https://cdn.logo.com/hotlink-ok/enterprise/eid_422203f0-477b-492b-9847-689feab1452a/logo-dark-2020.png',
-    img02: 'https://interier-foto.ru/wp-content/uploads/dlinnye-foto-4.jpg',
-    img03: 'https://popugai.info/wp-content/uploads/2015/01/korella-285x300.jpg',
+type PropsType = {
+    state: RootStateType
+    addPost: () => void
+    updNewPostText: (text: string) => void
 }
 
-const links = {
-    link01: 'Profile',
-    link02: 'Messages',
-    link03: 'News',
-    link04: 'Music',
-    link05: 'Settings',
-}
+const App = (props: PropsType) => {
 
-const App = () => {
     return (
-        <div className={'app-wrapper'}>
-            <Header imgHeader={images.img01}/>
+        <BrowserRouter>
+            <div className='app-wrapper'>
+                <Header imgHeader={props.state.header.logoImg}/>
 
-            <Navbar linkProfile={links.link01}
-                    linkMessages={links.link02}
-                    linkNews={links.link03}
-                    linkMusic={links.link04}
-                    linkSet={links.link05}/>
-
-            <Profile imgProfile01={images.img02}
-                     imgProfile02={images.img03}/>
-
-        </div>
+                <Navbar navbar={props.state.navbar}/>
+                <div className='app-wrapper-content'>
+                    <Route path={"/dialogs"}
+                           render={() => <Dialogs dialogPage={props.state.dialogPage}/>}/>{/*Route exact path*/}
+                    <Route path={"/profile"}
+                           render={() => <Profile profilePage={props.state.profilePage} updNewPostText={props.updNewPostText} addPost={props.addPost}/>}/>
+                    <Route path={"/feed"} render={() => <News/>}/>
+                    <Route path={"/music"} render={() => <Music/>}/>
+                    <Route path={"/settings"} render={() => <Settings/>}/>
+                </div>
+            </div>
+        </BrowserRouter>
     );
 }
 

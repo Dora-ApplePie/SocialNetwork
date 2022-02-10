@@ -5,7 +5,7 @@ type PropsTypeGen = {
     imgHeader: string
 }
 
-export const Header = (props: PropsTypeGen) => {
+export const Header: React.FC <PropsTypeGen> = (props) => {
     return (
         <header className={style.header}>
             <img alt={'Logo'}
