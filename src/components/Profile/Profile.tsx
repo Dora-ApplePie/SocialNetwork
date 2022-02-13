@@ -1,7 +1,7 @@
 import React from "react";
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from "./ProfileInfo/ProfileInfo";
-import {addPost, ProfilePageType} from "../../redux/state";
+import {ProfilePageType} from "../../redux/state";
 
 
 type PropsType = {

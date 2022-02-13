@@ -32,8 +32,8 @@ export const MyPosts = (props: PropsType) => {
             <div className={style.title}>
                 <h3>MyPosts</h3>
                 <textarea value={props.newPostText} onChange={onPostChange} ref={newPostElement} rows={4} cols={60}
-                          placeholder={'Введите ваш месседж...'}></textarea>
-                <button onClick={addPostText}>Send</button>
+                          placeholder={'Введите ваш месседж...'}/>
+                          <button onClick={addPostText}>Send</button>
             </div>
             {PostsElements} {/*Отрисовка компоненты Post*/}
         </div>

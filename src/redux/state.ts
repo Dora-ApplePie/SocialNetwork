@@ -1,5 +1,3 @@
-import {rerenderTrie} from "../render";
-
 export type RootStateType = {
     dialogPage: DialogPageType
     profilePage: ProfilePageType
@@ -134,6 +132,9 @@ let state: RootStateType = {
     },
 }
 
+let rerenderTrie = (state: RootStateType) => {
+    console.log("State was changed");
+}
 export const addPost = () => {
     const NewPost: PostType = {
         id: 5,
@@ -149,6 +150,10 @@ export const addPost = () => {
 export const updNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText;
     rerenderTrie(state);
+}
+
+export const subscribe = (observer: (state: RootStateType) => void) => {
+    rerenderTrie = observer
 }
 
 export default state;
