@@ -2,15 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import state, {addPost, RootStateType, subscribe, updNewPostText} from "./redux/state";
+import store, {RootStateType} from "./redux/state";
 
 let rerenderTrie = (state: RootStateType) => {
     ReactDOM.render(
-        <App updNewPostText={updNewPostText} state={state} addPost={addPost} />,
+        <App updNewPostText={store.updNewPostText.bind(store)}
+             state={state}
+             addPost={store.addPost.bind(store)}
+        />,
         document.getElementById('root')
     );
 }
-rerenderTrie(state);
+rerenderTrie(store.getState());
 
-subscribe(rerenderTrie)
+store.subscribe(rerenderTrie)
 
