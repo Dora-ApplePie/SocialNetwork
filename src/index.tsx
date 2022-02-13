@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import store, {RootStateType} from "./redux/state";
 
-let rerenderTrie = (state: RootStateType) => {
+let rerenderTree = (state: RootStateType) => {
     ReactDOM.render(
         <App updNewPostText={store.updNewPostText.bind(store)}
              state={state}
@@ -13,7 +13,7 @@ let rerenderTrie = (state: RootStateType) => {
         document.getElementById('root')
     );
 }
-rerenderTrie(store.getState());
+rerenderTree(store.getState());
 
-store.subscribe(rerenderTrie)
+store.subscribe(rerenderTree)
 

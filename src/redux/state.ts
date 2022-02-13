@@ -60,7 +60,16 @@ export type HeaderType = {
     logoImg: string
 }
 
-let store = {
+export type StoreType = {
+    _state: RootStateType
+    updNewPostText: (newText: string) => void
+    addPost: () => void
+    getState: () => RootStateType
+    _callSubscriber: (state: RootStateType) => void
+    subscribe: (observer: (state: RootStateType) => void) => void
+}
+
+let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -132,32 +141,49 @@ let store = {
             settingsLink: 'Settings',
         },
     },
-    getState(){
+    _callSubscriber() {
+        console.log("State was changed");
+    },
+
+    getState() {
         return this._state;
     },
-    _callSubscriber(state: RootStateType){
-        alert("State was changed");
-    },
-    addPost() {
-        const NewPost: PostType = {
-            id: 5,
-            img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-            text: this._state.profilePage.newPostText,
-            LikeCount: 0,
-        }
-        this._state.profilePage.posts.push(NewPost)
-        this._state.profilePage.newPostText= '';
-        this._callSubscriber(this._state);
-    },
-    updNewPostText (newText: string) {
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-    subscribe (observer: (state: RootStateType) => void) {
+    subscribe(observer) {
         this._callSubscriber = observer
+    },
+
+    // addPost() {
+    //     let NewPost: PostType = {
+    //         id: 5,
+    //         img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
+    //         text: this._state.profilePage.newPostText,
+    //         LikeCount: 0,
+    //     }
+    //     this._state.profilePage.posts.push(NewPost)
+    //     this._state.profilePage.newPostText = '';
+    //     this._callSubscriber(this._state);
+    // },
+    // updNewPostText(newText: string) {
+    //     this._state.profilePage.newPostText = newText;
+    //     this._callSubscriber(this._state);
+    // },
+    dispatch(action){
+        if(action.type === 'ADD-POST'){
+            let NewPost: PostType = {
+                id: 5,
+                img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
+                text: this._state.profilePage.newPostText,
+                LikeCount: 0,
+            }
+            this._state.profilePage.posts.push(NewPost)
+            this._state.profilePage.newPostText = '';
+            this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }
     }
 }
-
 
 export default store;
 
