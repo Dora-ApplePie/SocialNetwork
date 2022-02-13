@@ -13,8 +13,7 @@ import {RootStateType} from "./redux/state";
 
 type PropsType = {
     state: RootStateType
-    addPost: () => void
-    updNewPostText: (text: string) => void
+    dispatch: (action: any) => void
 }
 
 const App = (props: PropsType) => {
@@ -29,7 +28,8 @@ const App = (props: PropsType) => {
                     <Route path={"/dialogs"}
                            render={() => <Dialogs dialogPage={props.state.dialogPage}/>}/>{/*Route exact path*/}
                     <Route path={"/profile"}
-                           render={() => <Profile profilePage={props.state.profilePage} updNewPostText={props.updNewPostText} addPost={props.addPost}/>}/>
+                           render={() => <Profile profilePage={props.state.profilePage}
+                                                  dispatch={props.dispatch}/>}/>
                     <Route path={"/feed"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/settings"} render={() => <Settings/>}/>

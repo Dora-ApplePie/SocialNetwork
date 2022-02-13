@@ -62,11 +62,10 @@ export type HeaderType = {
 
 export type StoreType = {
     _state: RootStateType
-    updNewPostText: (newText: string) => void
-    addPost: () => void
     getState: () => RootStateType
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
+    dispatch: (action: any) => void
 }
 
 let store: StoreType = {
@@ -152,23 +151,8 @@ let store: StoreType = {
         this._callSubscriber = observer
     },
 
-    // addPost() {
-    //     let NewPost: PostType = {
-    //         id: 5,
-    //         img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-    //         text: this._state.profilePage.newPostText,
-    //         LikeCount: 0,
-    //     }
-    //     this._state.profilePage.posts.push(NewPost)
-    //     this._state.profilePage.newPostText = '';
-    //     this._callSubscriber(this._state);
-    // },
-    // updNewPostText(newText: string) {
-    //     this._state.profilePage.newPostText = newText;
-    //     this._callSubscriber(this._state);
-    // },
-    dispatch(action){
-        if(action.type === 'ADD-POST'){
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
             let NewPost: PostType = {
                 id: 5,
                 img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
@@ -178,7 +162,7 @@ let store: StoreType = {
             this._state.profilePage.posts.push(NewPost)
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT'){
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
         }
