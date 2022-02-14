@@ -182,21 +182,21 @@ let store: StoreType = {
     }
 }
 
-export const addPostAC = () => {
+export const addPostAC = (): AddPostActionType => {
     return {
         type: 'ADD-POST'
     } as const
 }
 
-export const updTextPostAC = (newText: string) => {
+export const updTextPostAC = (newText: string): updNewTextActionType => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
     } as const
 }
-
-export type addPostACType = ReturnType< typeof addPostAC>
-export type updNewTextACType = ReturnType< typeof updTextPostAC>
+//автогенерация
+// export type addPostACType = ReturnType< typeof addPostAC>
+// export type updNewTextACType = ReturnType< typeof updTextPostAC>
 
 export default store;
 
