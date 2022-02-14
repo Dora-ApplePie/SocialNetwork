@@ -8,14 +8,17 @@ import {BrowserRouter} from "react-router-dom";
 let rerenderTree = (state: RootStateType) => {
     ReactDOM.render(
         <BrowserRouter>
-        <App store={store}
-             dispatch={store.dispatch.bind(store)}
-        />
+            <App store={store}
+                 dispatch={store.dispatch.bind(store)}
+            />
         </BrowserRouter>
-        ,document.getElementById('root')
+        , document.getElementById('root')
     );
 }
 rerenderTree(store.getState());
 
-store.subscribe(rerenderTree)
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderTree(state);
+})
 

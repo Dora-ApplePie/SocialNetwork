@@ -1,6 +1,23 @@
-import {DialogPageType} from "./store";
+let initialState = {
+    dialogs: [
+        {id: 1, name: "Patricia"},
+        {id: 2, name: "Helga"},
+        {id: 3, name: "Regan"},
+        {id: 4, name: "Vidra"},
+        {id: 5, name: "Mouse"},
+        {id: 6, name: "Dog"}
+    ],
+    messages: [
+        {id: 1, message: 'Hello, how is your life, baby?'},
+        {id: 2, message: "Yo! What's up dude?"},
+        {id: 3, message: 'This is the reason of the night...ooohh'},
+        {id: 4, message: 'Hola, como estas?'},
+        {id: 5, message: 'Good evening, Ms. Dark'}
+    ],
+    newMessageBody: ""
+}
 
-export const dialogsReducer = (state: DialogPageType, action: DialogsReducerType) => {
+export const dialogsReducer = (state = initialState, action: DialogsReducerType) => {
     switch (action.type) {
         case 'UPDATE-NEW-MSG-BODY':
             state.newMessageBody = action.body;
