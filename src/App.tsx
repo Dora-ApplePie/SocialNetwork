@@ -8,12 +8,12 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Settings";
-import {ActionsType, StoreType} from "./redux/state";
+import {StoreType} from "./redux/state";
 
 
 type PropsType = {
     store: StoreType
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: any) => void
 }
 
 const App = (props: PropsType) => {
