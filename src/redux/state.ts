@@ -18,6 +18,7 @@ export type NavbarType = {
 export type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
+    newMessageBody: string
 }
 
 export type DialogType = {
@@ -68,33 +69,37 @@ export type StoreType = {
     dispatch: (action: ActionsType) => void
 }
 
-export type AddPostActionType = {
-    type: 'ADD-POST'
-}
+//автогенерация
+export type ActionsType = ReturnType< typeof addPostAC> |
+    ReturnType< typeof updTextPostAC> |
+    ReturnType< typeof newMessageBodyAC> |
+    ReturnType< typeof sendMessageAC>
 
-export type updNewTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-
-export type ActionsType = AddPostActionType | updNewTextActionType
-
-export const addPostAC = (): AddPostActionType => {
+export const addPostAC = () => {
     return {
         type: 'ADD-POST'
-    } //as const
+    } as const
 }
 
-export const updTextPostAC = (newText: string): updNewTextActionType => {
+export const updTextPostAC = (newText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
-    } //as const
+    } as const
 }
-//автогенерация
-// export type addPostACType = ReturnType< typeof addPostAC>
-// export type updNewTextACType = ReturnType< typeof updTextPostAC>
 
+export const newMessageBodyAC = (newMsgText: string) => {
+    return {
+        type: 'UPDATE-NEW-MSG-BODY',
+        body: newMsgText
+    } as const
+}
+
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND-MSG '
+    } as const
+}
 
 let store: StoreType = {
     _state: {
@@ -152,7 +157,8 @@ let store: StoreType = {
                 {id: 3, message: 'This is the reason of the night...ooohh'},
                 {id: 4, message: 'Hola, como estas?'},
                 {id: 5, message: 'Good evening, Ms. Dark'}
-            ]
+            ],
+            newMessageBody: ""
         },
 
         sidebar: {},
@@ -194,6 +200,14 @@ let store: StoreType = {
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);
+        } else if (action.type === 'UPDATE-NEW-MSG-BODY'){
+            this._state.dialogPage.newMessageBody = action.body;
+            this._callSubscriber(this._state)
+        } else if (action.type === 'SEND-MSG '){
+            let body = this._state.dialogPage.newMessageBody;
+            this._state.dialogPage.messages.push({id: 6, message: body})
+            this._state.dialogPage.newMessageBody = '';
+            this._callSubscriber(this._state)
         }
     }
 }
