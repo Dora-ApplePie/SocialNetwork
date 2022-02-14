@@ -65,8 +65,19 @@ export type StoreType = {
     getState: () => RootStateType
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionsType) => void
 }
+
+export type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+export type updNewTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type ActionsType = AddPostActionType | updNewTextActionType
 
 let store: StoreType = {
     _state: {
@@ -154,7 +165,7 @@ let store: StoreType = {
     dispatch(action) {
         if (action.type === 'ADD-POST') {
             let NewPost: PostType = {
-                id: 5,
+                id: new Date().getTime(),
                 img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
                 text: this._state.profilePage.newPostText,
                 LikeCount: 0,
@@ -162,6 +173,7 @@ let store: StoreType = {
             this._state.profilePage.posts.push(NewPost)
             this._state.profilePage.newPostText = '';
             this._callSubscriber(this._state);
+
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText;
             this._callSubscriber(this._state);

@@ -8,12 +8,12 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Settings";
-import {RootStateType} from "./redux/state";
+import {ActionsType, StoreType} from "./redux/state";
 
 
 type PropsType = {
-    state: RootStateType
-    dispatch: (action: any) => void
+    store: StoreType
+    dispatch: (action: ActionsType) => void
 }
 
 const App = (props: PropsType) => {
@@ -21,15 +21,15 @@ const App = (props: PropsType) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header imgHeader={props.state.header.logoImg}/>
+                <Header imgHeader={props.store.getState().header.logoImg}/>
 
-                <Navbar navbar={props.state.navbar}/>
+                <Navbar navbar={props.store.getState().navbar}/>
                 <div className='app-wrapper-content'>
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogPage={props.state.dialogPage}/>}/>{/*Route exact path*/}
+                           render={() => <Dialogs dialogPage={props.store.getState().dialogPage}/>}/>{/*Route exact path*/}
                     <Route path={"/profile"}
-                           render={() => <Profile profilePage={props.state.profilePage}
-                                                  dispatch={props.dispatch}/>}/>
+                           render={() => <Profile profilePage={props.store.getState().profilePage}
+                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
                     <Route path={"/feed"} render={() => <News/>}/>
                     <Route path={"/music"} render={() => <Music/>}/>
                     <Route path={"/settings"} render={() => <Settings/>}/>
