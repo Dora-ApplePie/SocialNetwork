@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Info.module.css"
-import {ProfileInfoType} from "../../../../redux/state";
+import {ProfileInfoType} from "../../../../redux/store";
 
 
 

@@ -160,15 +160,18 @@ let store: StoreType = {
     },
 
     dispatch(action) {
+        //переприсваеваем для перерисовки стейта
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
 
-        this._callSubscriber(this._state)
+        this._callSubscriber(this._state) //уведомляем подписчиков
     }
 }
 
 export default store;
 
-//window.store = store;
+//@ts-ignore
+window.store=store
+
 
 //store - OOP

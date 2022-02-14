@@ -1,5 +1,5 @@
 import React from "react";
-import {ProfileInfoType} from "../../../redux/state";
+import {ProfileInfoType} from "../../../redux/store";
 import {Info} from "./Info/Info";
 
 type PropsType = {
