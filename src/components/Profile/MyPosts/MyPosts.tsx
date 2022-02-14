@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import style from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {ActionsType, PostType} from "../../../redux/state";
+import {ActionsType, addPostAC, PostType, updTextPostAC} from "../../../redux/state";
 
 type PropsType = {
     posts: Array<PostType>
@@ -18,13 +18,13 @@ export const MyPosts = (props: PropsType) => {
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let addPostText = () => {
-        props.dispatch({type: 'ADD-POST'});
+        props.dispatch(addPostAC());
     }
     let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         debugger;
         if (newPostElement.current) {
-            //props.updNewText(e.currentTarget.value);
-            props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: e.currentTarget.value});
+            let newText = e.currentTarget.value
+            props.dispatch(updTextPostAC(newText));
         }
     }
     return (
@@ -34,7 +34,7 @@ export const MyPosts = (props: PropsType) => {
                 <h3>MyPosts</h3>
                 <textarea value={props.newPostText} onChange={onPostChange} ref={newPostElement} rows={4} cols={60}
                           placeholder={'Введите ваш месседж...'}/>
-                          <button onClick={addPostText}>Send</button>
+                <button onClick={addPostText}>Send</button>
             </div>
             {PostsElements} {/*Отрисовка компоненты Post*/}
         </div>
