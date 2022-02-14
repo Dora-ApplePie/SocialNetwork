@@ -1,3 +1,6 @@
+import {profileReducer} from "./profileReducer";
+import {dialogsReducer} from "./dialogsReducer";
+
 export type RootStateType = {
     dialogPage: DialogPageType
     profilePage: ProfilePageType
@@ -66,40 +69,11 @@ export type StoreType = {
     getState: () => RootStateType
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: any) => void
 }
 
-//автогенерация
-export type ActionsType = ReturnType< typeof addPostAC> |
-    ReturnType< typeof updTextPostAC> |
-    ReturnType< typeof newMessageBodyAC> |
-    ReturnType< typeof sendMessageAC>
+// export type ActionsType = DialogsReducerType | profileReducerType
 
-export const addPostAC = () => {
-    return {
-        type: 'ADD-POST'
-    } as const
-}
-
-export const updTextPostAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
-
-export const newMessageBodyAC = (newMsgText: string) => {
-    return {
-        type: 'UPDATE-NEW-MSG-BODY',
-        body: newMsgText
-    } as const
-}
-
-export const sendMessageAC = () => {
-    return {
-        type: 'SEND-MSG '
-    } as const
-}
 
 let store: StoreType = {
     _state: {
@@ -186,29 +160,10 @@ let store: StoreType = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
-            let NewPost: PostType = {
-                id: new Date().getTime(),
-                img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-                text: this._state.profilePage.newPostText,
-                LikeCount: 0,
-            }
-            this._state.profilePage.posts.push(NewPost)
-            this._state.profilePage.newPostText = '';
-            this._callSubscriber(this._state);
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogPage = dialogsReducer(this._state.dialogPage, action)
 
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscriber(this._state);
-        } else if (action.type === 'UPDATE-NEW-MSG-BODY'){
-            this._state.dialogPage.newMessageBody = action.body;
-            this._callSubscriber(this._state)
-        } else if (action.type === 'SEND-MSG '){
-            let body = this._state.dialogPage.newMessageBody;
-            this._state.dialogPage.messages.push({id: 6, message: body})
-            this._state.dialogPage.newMessageBody = '';
-            this._callSubscriber(this._state)
-        }
+        this._callSubscriber(this._state)
     }
 }
 
