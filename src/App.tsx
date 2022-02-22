@@ -12,8 +12,8 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type PropsType = {
-    store: StoreType
-    dispatch: (action: any) => void
+    // store: StoreType
+    // dispatch: (action: any) => void
 }
 
 const App = (props: PropsType) => {
@@ -21,12 +21,11 @@ const App = (props: PropsType) => {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                <Header imgHeader={props.store.getState().header.logoImg}/>
-
-                <Navbar navbar={props.store.getState().navbar}/>
+                {/*<Header imgHeader={props.store.getState().header.logoImg}/>*/}
+                {/*<Navbar navbar={props.store.getState().navbar}/>*/}
                 <div className='app-wrapper-content'>
                     <Route path={"/dialogs"}
-                           render={() => <DialogsContainer />}/>{/*Route exact path*/}
+                           render={() => <DialogsContainer />}/> {/*Route exact path*/}
                     <Route path={"/profile"}
                            render={() => <Profile />}/>
                     <Route path={"/feed"} render={() => <News/>}/>

@@ -1,34 +1,28 @@
 import React from "react";
-import {StoreType} from "../../redux/store";
 import {newMessageBodyAC, sendMessageAC} from "../../redux/dialogsReducer";
 import Dialogs from "./Dialogs";
+import StoreContext from "../../StoreContext";
 
 
-type PropsType = {
-    store: StoreType
-    newMessageBody: string
-}
-
-
-const DialogsComponent = (props: PropsType) => {
+const DialogsComponent = () => {
 
     //let sendMessage = React.createRef<HTMLTextAreaElement>(); по максимуму не используем
 
-    let state = props.store.getState().dialogPage
+    return <StoreContext.Consumer>
+        { store => {
+            let onSendMessage = () => {
+                store.dispatch(sendMessageAC())
+            }
 
-    let onSendMessage = () => {
-        props.store.dispatch(sendMessageAC())
-    }
-
-    let onChangeNewMessage = (body: string) => {
-        props.store.dispatch(newMessageBodyAC(body))
-    }
-
-    return (
-        <Dialogs updNewMessageBody={onChangeNewMessage}
+            let onChangeNewMessage = (body: string) => {
+                store.dispatch(newMessageBodyAC(body))
+            }
+        return <Dialogs updNewMessageBody={onChangeNewMessage}
                  sendMessage={onSendMessage}
-                 dialogPage={state}
-                 newMessageBody={props.newMessageBody}/>)
+                 dialogPage={store.getState().dialogPage}
+                 newMessageBody={store.getState().dialogPage.newMessageBody}/>}
+    }
+    </StoreContext.Consumer>
 }
 
 export default DialogsComponent;
