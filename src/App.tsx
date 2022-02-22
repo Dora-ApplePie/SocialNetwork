@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Setting/Settings";
 import {StoreType} from "./redux/store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
 type PropsType = {
@@ -26,7 +27,7 @@ const App = (props: PropsType) => {
                 <Navbar navbar={props.store.getState().navbar}/>
                 <div className='app-wrapper-content'>
                     <Route path={"/dialogs"}
-                           render={() => <Dialogs dialogPage={props.store.getState().dialogPage} store={props.store} newMessageBody={props.store.getState().dialogPage.newMessageBody}/>}/>{/*Route exact path*/}
+                           render={() => <DialogsContainer store={props.store} newMessageBody={props.store.getState().dialogPage.newMessageBody}/>}/>{/*Route exact path*/}
                     <Route path={"/profile"}
                            render={() => <Profile profilePage={props.store.getState().profilePage}
                                                   store={props.store}/>}/>
