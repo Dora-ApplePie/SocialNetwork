@@ -1,6 +1,28 @@
-import {PostType} from "./store";
+export type InitialStateType = {
+    posts: Array<PostType>
+    profileInfo: Array<ProfileInfoType>
+    newPostText: string
+}
 
-let initialState = {
+export type ProfileInfoType = {
+    imgBar: string
+    imgAvatar: string
+    name: string
+    birthday: string
+    city: string
+    education: string
+    mobile: string
+
+}
+
+export type PostType = {
+    id: number
+    img: string
+    text: string
+    LikeCount: number
+}
+
+let initialState: InitialStateType = {
     posts: [
         {
             id: 1,
@@ -40,7 +62,7 @@ let initialState = {
     newPostText: '',
 }
 
-export const profileReducer = (state = initialState, action: profileReducerType) => {
+export const profileReducer = (state = initialState, action: profileReducerType):InitialStateType => {
     switch (action.type) {
         case "ADD-POST":
             let NewPost: PostType = {
@@ -61,7 +83,10 @@ export const profileReducer = (state = initialState, action: profileReducerType)
 }
 
 //автогенерация
-export type profileReducerType = ReturnType<typeof addPostAC> | ReturnType<typeof updTextPostAC>
+export type profileReducerType = addPostACType | updTextPostACType
+
+export type addPostACType = ReturnType<typeof addPostAC>
+export type updTextPostACType = ReturnType<typeof updTextPostAC>
 
 export const addPostAC = () => {
     return {

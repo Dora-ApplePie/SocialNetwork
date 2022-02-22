@@ -1,6 +1,6 @@
 import React from "react";
-import {ProfileInfoType} from "../../../redux/store";
 import {Info} from "./Info/Info";
+import {ProfileInfoType} from "../../../redux/profileReducer";
 
 type PropsType = {
     profileInfo: Array<ProfileInfoType>

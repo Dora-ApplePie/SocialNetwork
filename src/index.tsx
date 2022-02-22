@@ -4,7 +4,8 @@ import './index.css';
 import App from './App';
 import store, {RootStateType} from "./redux/store";
 import {BrowserRouter} from "react-router-dom";
-import {Provider} from './StoreContext';
+import {Provider} from "react-redux";
+
 
 let rerenderTree = (state: RootStateType) => {
     ReactDOM.render(

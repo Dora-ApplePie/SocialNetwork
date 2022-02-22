@@ -1,16 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import style from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/store";
+import {PostPropsType} from "./MyPostsContainer";
 
-type PropsType = {
-    posts: Array<PostType>
-    newPostText: string
-    updNewPostText: (newText: string) => void
-    addPost: () => void
-}
 
-export const MyPosts = (props: PropsType) => { // эта компонента чистая не привязана к редаксу только вызывает колбеки
+export const MyPosts = (props: PostPropsType) => { // эта компонента чистая не привязана к редаксу только вызывает колбеки
 
     let PostsElements =
         props.posts

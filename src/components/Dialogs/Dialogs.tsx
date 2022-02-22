@@ -2,18 +2,10 @@ import React, {ChangeEvent} from "react";
 import style from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Messages from "./Messages/Messages";
-import {DialogPageType} from "../../redux/store";
+import {DialogsPropsType} from "./DialogsContainer";
 
 
-type PropsType = {
-    dialogPage: DialogPageType
-    newMessageBody: string
-    updNewMessageBody: (body: string) => void
-    sendMessage: () => void
-}
-
-
-const Dialogs = (props: PropsType) => {
+const Dialogs = (props: DialogsPropsType) => {
 
     //let sendMessage = React.createRef<HTMLTextAreaElement>(); по максимуму не используем
 

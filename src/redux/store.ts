@@ -18,36 +18,36 @@ export type NavbarType = {
 }
 
 
-export type DialogPageType = {
+ type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
 }
 
-export type DialogType = {
+type DialogType = {
     id: number
     name: string
 }
 
-export type MessageType = {
+type MessageType = {
     id: number
     message: string
 }
 
-export type ProfilePageType = {
+ type ProfilePageType = {
     posts: Array<PostType>
     profileInfo: Array<ProfileInfoType>
     newPostText: string
 }
 
-export type PostType = {
+ type PostType = {
     id: number
     img: string
     text: string
     LikeCount: number
 }
 
-export type ProfileInfoType = {
+ type ProfileInfoType = {
     imgBar: string
     imgAvatar: string
     name: string
