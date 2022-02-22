@@ -2,15 +2,15 @@ import React, {ChangeEvent} from "react";
 import style from "./MyPosts.module.css"
 import {Post} from "./Post/Post";
 import {PostType} from "../../../redux/store";
-import {addPostAC, updTextPostAC} from "../../../redux/profileReducer";
 
 type PropsType = {
     posts: Array<PostType>
     newPostText: string
-    dispatch: (action: any) => void
+    updNewPostText: (newText: string) => void
+    addPost: () => void
 }
 
-export const MyPosts = (props: PropsType) => {
+export const MyPosts = (props: PropsType) => { // эта компонента чистая не привязана к редаксу только вызывает колбеки
 
     let PostsElements =
         props.posts
@@ -18,15 +18,15 @@ export const MyPosts = (props: PropsType) => {
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    let addPostText = () => {
-        props.dispatch(addPostAC());
+    let onAddPostText = () => {
+        props.addPost();
     }
-    let onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        debugger;
-        if (newPostElement.current) {
-            let newText = e.currentTarget.value
-            props.dispatch(updTextPostAC(newText));
+    let onPostChange = () => {
+        if (newPostElement.current){
+            let newText = newPostElement.current.value
+            props.updNewPostText(newText);
         }
+
     }
     return (
 
@@ -35,7 +35,7 @@ export const MyPosts = (props: PropsType) => {
                 <h3>MyPosts</h3>
                 <textarea value={props.newPostText} onChange={onPostChange} ref={newPostElement} rows={4} cols={60}
                           placeholder={'Введите ваш месседж...'}/>
-                <button onClick={addPostText}>Send</button>
+                <button onClick={onAddPostText}>Send</button>
             </div>
             {PostsElements} {/*Отрисовка компоненты Post*/}
         </div>
