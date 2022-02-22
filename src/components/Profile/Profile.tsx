@@ -13,8 +13,8 @@ type PropsType = {
 export const Profile = (props: PropsType) => {
     return (
         <div>
-            <ProfileInfo profileInfo={props.profilePage.profileInfo}/>
-            <MyPostsContainer store={store}/>
+            <ProfileInfo />
+            <MyPostsContainer />
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import {PostType, ProfilePageType} from "./store";
+import {PostType} from "./store";
 
 let initialState = {
     posts: [
