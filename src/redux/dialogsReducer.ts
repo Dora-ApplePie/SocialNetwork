@@ -18,10 +18,10 @@ let initialState: initialStateType = {
     dialogs: [
         {id: 1, name: "Patricia"},
         {id: 2, name: "Helga"},
-        {id: 3, name: "Regan"},
-        {id: 4, name: "Vidra"},
-        {id: 5, name: "Mouse"},
-        {id: 6, name: "Dog"}
+        {id: 3, name: "Ronda"},
+        {id: 4, name: "Jessica"},
+        {id: 5, name: "Tatiana"},
+        {id: 6, name: "Doctor"}
     ],
     messages: [
         {id: 1, message: 'Hello, how is your life, baby?'},
@@ -34,18 +34,13 @@ let initialState: initialStateType = {
 }
 
 export const dialogsReducer = (state = initialState, action: DialogsReducerType): initialStateType => {
-    let stateCopy = { ...state };
-
     switch (action.type) {
         case 'UPDATE-NEW-MSG-BODY':
-            stateCopy.newMessageBody = action.body;
-            return stateCopy;
+            return { ...state, newMessageBody: action.body};
 
         case 'SEND-MSG ':
-            let body = stateCopy.newMessageBody;
-            stateCopy.messages.push({id: 6, message: body})
-            stateCopy.newMessageBody = '';
-            return stateCopy;
+            let body = state.newMessageBody;
+            return { ...state, messages: [...state.messages, {id: 6, message: body}], newMessageBody:''};
         default:
             return state;
     }
