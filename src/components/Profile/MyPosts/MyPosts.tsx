@@ -8,12 +8,11 @@ export const MyPosts = (props: PostPropsType) => { // эта компонент�
 
     let PostsElements =
         props.posts
-            .map(p => <Post img={p.img} text={p.text} LikeCount={p.LikeCount} id={p.id}/>)
+            .map((p,index) => <Post key={index} img={p.img} text={p.text} LikeCount={p.LikeCount} id={p.id}/>)
 
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPostText = () => {
-        debugger;
         props.addPost();
     }
     let onPostChange = () => {

@@ -1,33 +1,34 @@
 import React from "react";
 import style from "./Navbar.module.css"
 import {NavLink} from 'react-router-dom';
-import {NavbarType} from "../../redux/store";
 
 
+export const Navbar: React.FC = () => {
 
-type PropsType= {
-    navbar: NavbarType
+const navbar = {
+    profileLink: 'Profile',
+    messagesLink: 'Messages',
+    newsLink: 'News',
+    musicLink: 'Music',
+    settingsLink: 'Settings'
 }
-
-export const Navbar: React.FC <PropsType> = (props) => {
-
 
     return (<nav className={style.nav}>
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/profile'}>{props.navbar.profileLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/profile'}>{navbar.profileLink}</NavLink>
         </div>
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/dialogs'}>{props.navbar.messagesLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/dialogs'}>{navbar.messagesLink}</NavLink>
         </div>
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/feed'}>{props.navbar.newsLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/feed'}>{navbar.newsLink}</NavLink>
         </div>
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/music'}>{props.navbar.musicLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/music'}>{navbar.musicLink}</NavLink>
         </div>
 
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/settings'}>{props.navbar.musicLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/settings'}>{navbar.musicLink}</NavLink>
         </div>
     </nav>)
 }

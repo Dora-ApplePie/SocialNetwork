@@ -5,17 +5,12 @@ import {DialogType} from "../../../redux/dialogsReducer";
 
 
 
-
-type PropsType = {
-    dialogs: DialogType
-}
-
-const DialogItem = (props: PropsType) => {
-    let path = "/dialogs/" + props.dialogs.id
+const DialogItem = (props: DialogType) => {
+    let path = "/dialogs/" + props.id
     return (
         <div className={style.dialog}>
             <NavLink activeClassName={style.active} to={path}>
-                {props.dialogs.name}
+                {props.name}
             </NavLink>
         </div>
     )

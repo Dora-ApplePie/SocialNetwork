@@ -1,7 +1,7 @@
 import {profileReducer} from "./profileReducer";
 import {dialogsReducer} from "./dialogsReducer";
 
-export type RootStateType = {
+type RootStateType = {
     dialogPage: DialogPageType
     profilePage: ProfilePageType
     sidebar: SideBarType
@@ -9,7 +9,7 @@ export type RootStateType = {
     navbar: NavbarType
 }
 
-export type NavbarType = {
+type NavbarType = {
     profileLink: string
     messagesLink: string
     newsLink: string
@@ -18,7 +18,7 @@ export type NavbarType = {
 }
 
 
- type DialogPageType = {
+type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
     newMessageBody: string
@@ -34,20 +34,20 @@ type MessageType = {
     message: string
 }
 
- type ProfilePageType = {
+type ProfilePageType = {
     posts: Array<PostType>
     profileInfo: Array<ProfileInfoType>
     newPostText: string
 }
 
- type PostType = {
+type PostType = {
     id: number
     img: string
     text: string
     LikeCount: number
 }
 
- type ProfileInfoType = {
+type ProfileInfoType = {
     imgBar: string
     imgAvatar: string
     name: string
@@ -60,11 +60,11 @@ type MessageType = {
 
 export type SideBarType = {}
 
-export type HeaderType = {
+type HeaderType = {
     logoImg: string
 }
 
-export type StoreType = {
+type StoreType = {
     _state: RootStateType
     getState: () => RootStateType
     _callSubscriber: (state: RootStateType) => void
@@ -171,7 +171,7 @@ let store: StoreType = {
 export default store;
 
 //@ts-ignore
-window.store=store
+window.store = store
 
 
 //store - OOP

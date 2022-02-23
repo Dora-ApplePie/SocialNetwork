@@ -10,18 +10,13 @@ import {Settings} from "./components/Setting/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 
-type PropsType = {
-    // store: StoreType
-    // dispatch: (action: any) => void
-}
-
-const App = (props: PropsType) => {
+const App = () => {
 
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
-                {/*<Header imgHeader={props.store.getState().header.logoImg}/>*/}
-                {/*<Navbar navbar={props.store.getState().navbar}/>*/}
+                <Header />
+                <Navbar />
                 <div className='app-wrapper-content'>
                     <Route path={"/dialogs"}
                            render={() => <DialogsContainer />}/> {/*Route exact path*/}

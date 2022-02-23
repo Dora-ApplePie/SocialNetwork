@@ -7,7 +7,6 @@ import {Dispatch} from "redux";
 
 type MapStateToPropsType = {
     dialogPage: initialStateType,
-    newMessageBody: string,
 }
 
 type MapDispatchToPropsType = {
@@ -20,7 +19,6 @@ export type DialogsPropsType = MapDispatchToPropsType & MapStateToPropsType
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => { //это функция которая принимает стейт
     return {
         dialogPage: state.dialogPage,
-        newMessageBody: state.dialogPage.newMessageBody
     }
 }
 let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
