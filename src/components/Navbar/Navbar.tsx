@@ -10,7 +10,8 @@ const navbar = {
     messagesLink: 'Messages',
     newsLink: 'News',
     musicLink: 'Music',
-    settingsLink: 'Settings'
+    settingsLink: 'Settings',
+    usersLink: 'Users',
 }
 
     return (<nav className={style.nav}>
@@ -19,6 +20,9 @@ const navbar = {
         </div>
         <div className={style.item}>
             <NavLink activeClassName={style.active} to={'/dialogs'}>{navbar.messagesLink}</NavLink>
+        </div>
+        <div className={style.item}>
+            <NavLink activeClassName={style.active} to={'/users'}>{navbar.usersLink}</NavLink>
         </div>
         <div className={style.item}>
             <NavLink activeClassName={style.active} to={'/feed'}>{navbar.newsLink}</NavLink>
