@@ -13,6 +13,7 @@ export const MyPosts = (props: PostPropsType) => { // эта компонент�
     let newPostElement = React.createRef<HTMLTextAreaElement>();
 
     let onAddPostText = () => {
+        debugger;
         props.addPost();
     }
     let onPostChange = () => {

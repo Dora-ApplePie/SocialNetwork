@@ -64,19 +64,23 @@ let initialState: InitialStateType = {
 
 export const profileReducer = (state = initialState, action: profileReducerType):InitialStateType => {
     switch (action.type) {
-        case "ADD-POST":
+        case "ADD-POST": {
             let NewPost: PostType = {
                 id: new Date().getTime(),
                 img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
                 text: state.newPostText,
                 LikeCount: 0,
             };
-            state.posts.push(NewPost)
-            state.newPostText = '';
-            return state;
-        case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText;
-            return state;
+            let stateCopy = {...state, posts: [...state.posts]}
+            stateCopy.posts.push(NewPost)
+            stateCopy.newPostText = '';
+            return stateCopy;
+        }
+        case "UPDATE-NEW-POST-TEXT": {
+            let stateCopy = {...state, text: state.newPostText}
+            stateCopy.newPostText = action.newText;
+            return stateCopy;
+        }
         default:
             return state;
     }
