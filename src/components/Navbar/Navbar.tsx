@@ -32,7 +32,7 @@ const navbar = {
         </div>
 
         <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/settings'}>{navbar.musicLink}</NavLink>
+            <NavLink activeClassName={style.active} to={'/settings'}>{navbar.settingsLink}</NavLink>
         </div>
     </nav>)
 }
