@@ -6,16 +6,16 @@ import userPhoto from '../../assets/img/persons-img.png'
 
 class Users extends React.Component<DispatchPropsType, any> {
 
-    getUsers = () => {
-        if (this.props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
-                response => {
-                    this.props.setUser(response.data.items)
-                });
-        }}
+    constructor(props: DispatchPropsType) {
+        super(props);
+        alert('create new object');
+        axios.get("https://social-network.samuraijs.com/api/1.0/users").then(
+            response => {
+                this.props.setUser(response.data.items)
+            });
+    }
     render() {
         return <div>
-            <button onClick={this.getUsers}>Get users</button>
             {
                 this.props.users.map(u => <div key={u.id} className={styles.block}>
             <span className={styles.block}>
