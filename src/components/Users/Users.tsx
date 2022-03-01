@@ -28,7 +28,7 @@ const Users = (props: UsersType) => {
         <div>
             {pages.map(p => {
                 return <span className={props.currentPage === p ? styles.selectedPage : ''}
-                             onClick={(e) => {
+                             onClick={() => {
                                  props.onPageChanged(p)
                              }}
                 >{p}</span>
@@ -37,7 +37,8 @@ const Users = (props: UsersType) => {
                 props.users.map(u => <div key={u.id} className={styles.block}>
             <span className={styles.block}>
                 <div>
-                    <img alt={'avatar'} src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
+                    <img alt={'avatar'} src={u.photos.small != null ? u.photos.small : userPhoto}
+                         className={styles.userPhoto}/>
                 </div>
                 <span>
                 <span>

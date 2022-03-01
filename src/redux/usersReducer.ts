@@ -21,40 +21,7 @@ export type initialStateType = {
 }
 
 const initialState: initialStateType = {
-    users: [
-        // {
-        //     id: 1,
-        //     photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/b8c011df-9831-4eaa-9eb7-7dc901a06b60/360',
-        //     followed: false,
-        //     fullName: 'Rozalind',
-        //     status: "I'm crazy",
-        //     location: {city: 'Madrid', country: 'Spain'}
-        // },
-        // {
-        //     id: 2,
-        //     photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/b8c011df-9831-4eaa-9eb7-7dc901a06b60/360',
-        //     followed: true,
-        //     fullName: 'Polina',
-        //     status: "I'm a boss girl",
-        //     location: {city: 'Minsk', country: 'Belarus'}
-        // },
-        // {
-        //     id: 3,
-        //     photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/b8c011df-9831-4eaa-9eb7-7dc901a06b60/360',
-        //     followed: false,
-        //     fullName: 'Mailo',
-        //     status: "I'm a dog",
-        //     location: {city: 'Bali', country: 'Indonesia'}
-        // },
-        // {
-        //     id: 4,
-        //     photoUrl: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1704946/b8c011df-9831-4eaa-9eb7-7dc901a06b60/360',
-        //     followed: true,
-        //     fullName: 'Kevin',
-        //     status: "I'm a children!",
-        //     location: {city: 'Colorado', country: 'USA'}
-        // },
-    ],
+    users: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
@@ -78,7 +45,12 @@ export const userReducer = (state: initialStateType = initialState, action: user
 }
 
 //автогенерация
-export type usersReducerType = followACType | unfollowACType | setUsersType | setCurrentPageType | setTotalUsersCountType
+export type usersReducerType =
+    followACType
+    | unfollowACType
+    | setUsersType
+    | setCurrentPageType
+    | setTotalUsersCountType
 
 export type followACType = ReturnType<typeof followAC>
 export type unfollowACType = ReturnType<typeof unfollowAC>
