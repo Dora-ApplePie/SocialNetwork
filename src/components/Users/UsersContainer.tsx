@@ -12,12 +12,14 @@ import {
 } from "../../redux/usersReducer";
 import axios from "axios";
 import Users from "./Users";
+import preloader from '../../assets/img/loading.gif';
 
 type MapStateToPropsType = {
     users: UserType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 type MapDispatchToPropsType = {
@@ -51,13 +53,16 @@ class UsersContainer extends React.Component<DispatchPropsType, any> {
 
     render() {
 
-        return <Users totalUsersCount={this.props.totalUsersCount}
+        return <>
+            {this.props.isFetching ? <img src={preloader}/> : null}
+        <Users totalUsersCount={this.props.totalUsersCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
                       onPageChanged={this.onPageChanged}
                       users={this.props.users}
                       unfollow={this.props.unfollow}
                       follow={this.props.follow}/>
+        </>
     }
 }
 
@@ -66,7 +71,8 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
     }
 }
 
