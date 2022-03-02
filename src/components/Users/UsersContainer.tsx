@@ -8,11 +8,11 @@ import {
     setUsersAC,
     UserType,
     setCurrentPageAC,
-    setTotalUsersCountAC
+    setTotalUsersCountAC, toggleIsFetchingAC
 } from "../../redux/usersReducer";
 import axios from "axios";
 import Users from "./Users";
-import preloader from '../../assets/img/loading.gif';
+import Preloader from "../common/Preloader/Preloader";
 
 type MapStateToPropsType = {
     users: UserType[]
@@ -28,6 +28,7 @@ type MapDispatchToPropsType = {
     setUser: (users: Array<UserType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalCount: number) => void
+    toggleIsFetching: (isFetching: boolean) => void
 }
 
 export type DispatchPropsType = MapStateToPropsType & MapDispatchToPropsType
@@ -36,8 +37,10 @@ export type DispatchPropsType = MapStateToPropsType & MapDispatchToPropsType
 class UsersContainer extends React.Component<DispatchPropsType, any> {
 
     componentDidMount() {
+        this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(
             response => {
+                this.props.toggleIsFetching(false)
                 this.props.setUser(response.data.items);
                 this.props.setTotalUsersCount(response.data.totalCount);
             });
@@ -45,8 +48,10 @@ class UsersContainer extends React.Component<DispatchPropsType, any> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
+        this.props.toggleIsFetching(true);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(
             response => {
+                this.props.toggleIsFetching(false);
                 this.props.setUser(response.data.items);
             });
     }
@@ -54,7 +59,7 @@ class UsersContainer extends React.Component<DispatchPropsType, any> {
     render() {
 
         return <>
-            {this.props.isFetching ? <img src={preloader}/> : null}
+            {this.props.isFetching ? <Preloader/>: null}
         <Users totalUsersCount={this.props.totalUsersCount}
                       pageSize={this.props.pageSize}
                       currentPage={this.props.currentPage}
@@ -92,6 +97,9 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         },
         setTotalUsersCount: (totalCount: number) => {
             dispatch(setTotalUsersCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching: boolean) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         },
     }
 }
