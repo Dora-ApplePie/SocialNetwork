@@ -1,18 +1,7 @@
 export type InitialStateType = {
     posts: Array<PostType>
-    profileInfo: Array<ProfileInfoType>
     newPostText: string
-}
-
-export type ProfileInfoType = {
-    imgBar: string
-    imgAvatar: string
-    name: string
-    birthday: string
-    city: string
-    education: string
-    mobile: string
-
+    profile: any
 }
 
 export type PostType = {
@@ -48,18 +37,8 @@ let initialState: InitialStateType = {
             text: "VK is the boolshit",
             LikeCount: 40000,
         }],
-    profileInfo: [
-        {
-            imgBar: 'https://png.pngtree.com/thumb_back/fw800/background/20191025/pngtree-red-smoke-in-black-background-image_320082.jpg',
-            imgAvatar: 'https://habrastorage.org/files/60c/afa/aba/60cafaaba7584b6a85be69d843d751e7.jpeg',
-            name: 'Daria Don',
-            birthday: 'Date of Birth: 13 September',
-            city: 'City: Washington',
-            education: 'Education: Standford',
-            mobile: 'Mobile: +375(29)666-66-66',
-        },
-    ],
     newPostText: '',
+    profile: null,
 }
 
 export const profileReducer = (state = initialState, action: profileReducerType):InitialStateType => {
@@ -76,16 +55,20 @@ export const profileReducer = (state = initialState, action: profileReducerType)
         case "UPDATE-NEW-POST-TEXT": {
             return  {...state, newPostText: action.newText}
         }
+        case "SET-USER-PROFILE": {
+            return {...state, profile: action.payload.profile}
+        }
         default:
             return state;
     }
 }
 
 //автогенерация
-export type profileReducerType = addPostACType | updTextPostACType
+export type profileReducerType = addPostACType | updTextPostACType | setUserProfileType
 
 export type addPostACType = ReturnType<typeof addPostAC>
 export type updTextPostACType = ReturnType<typeof updTextPostAC>
+export type setUserProfileType = ReturnType<typeof setUserProfile>
 
 export const addPostAC = () => {
     return {
@@ -97,6 +80,15 @@ export const updTextPostAC = (newText: string) => {
     return {
         type: 'UPDATE-NEW-POST-TEXT',
         newText: newText
+    } as const
+}
+
+export const setUserProfile = (profile: any) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        payload: {
+            profile
+        }
     } as const
 }
 

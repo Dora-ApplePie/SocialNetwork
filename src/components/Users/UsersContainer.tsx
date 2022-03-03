@@ -33,7 +33,7 @@ type MapDispatchToPropsType = {
 export type DispatchPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 
-class UsersContainer extends React.Component<DispatchPropsType, any> {
+class UsersContainer extends React.Component<DispatchPropsType> {
 
     componentDidMount() {
         this.props.toggleIsFetching(true)
@@ -56,7 +56,6 @@ class UsersContainer extends React.Component<DispatchPropsType, any> {
     }
 
     render() {
-
         return <>
             {this.props.isFetching ? <Preloader/> : null}
             <Users totalUsersCount={this.props.totalUsersCount}

@@ -1,0 +1,14 @@
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.imgProfile {
+    margin: 5px 8px;
+    min-width: 270px;
+}
+
+.description {
+    margin: 30px 50px;
+    font-weight: bold;
+}
