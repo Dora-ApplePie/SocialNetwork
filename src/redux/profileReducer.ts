@@ -72,10 +72,9 @@ export const setUserProfileData = (userId: string) => {
             userId = "21450";
         }
         userAPI.setUserProfile(userId)
-            .then(
-                response => {
-                    dispatch(setUserProfile(response.data));
-                });
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            });
     }
 }
 
