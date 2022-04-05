@@ -1,3 +1,6 @@
+import {userAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type InitialStateType = {
     posts: Array<PostType>
     newPostText: string
@@ -41,7 +44,7 @@ let initialState: InitialStateType = {
     profile: null,
 }
 
-export const profileReducer = (state = initialState, action: profileReducerType):InitialStateType => {
+export const profileReducer = (state = initialState, action: profileReducerType): InitialStateType => {
     switch (action.type) {
         case "ADD-POST": {
             let NewPost: PostType = {
@@ -50,16 +53,29 @@ export const profileReducer = (state = initialState, action: profileReducerType)
                 text: state.newPostText,
                 LikeCount: 0,
             };
-            return {...state, posts: [...state.posts, NewPost], newPostText:''}
+            return {...state, posts: [...state.posts, NewPost], newPostText: ''}
         }
         case "UPDATE-NEW-POST-TEXT": {
-            return  {...state, newPostText: action.newText}
+            return {...state, newPostText: action.newText}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
         }
         default:
             return state;
+    }
+}
+
+export const setUserProfileData = (userId: string) => {
+    return (dispatch: Dispatch<profileReducerType>) => {
+        if (!userId) {
+            userId = "21450";
+        }
+        userAPI.setUserProfile(userId)
+            .then(
+                response => {
+                    dispatch(setUserProfile(response.data));
+                });
     }
 }
 
