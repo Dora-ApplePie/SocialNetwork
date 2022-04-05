@@ -74,6 +74,32 @@ export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
     }
 }
 
+export const unfollow = (userId: number) => {
+    return (dispatch: Dispatch<usersReducerType>) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        userAPI.unfollow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(unfollowSuccess(userId));
+                }
+                dispatch(toggleFollowingProgress(false, userId));
+            });
+    }
+}
+
+export const follow = (userId: number) => {
+    return (dispatch: Dispatch<usersReducerType>) => {
+        dispatch(toggleFollowingProgress(true, userId));
+        userAPI.follow(userId)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(followSuccess(userId));
+                }
+                dispatch(toggleFollowingProgress(false, userId));
+            });
+    }
+}
+
 //автогенерация
 export type usersReducerType =
     followACType
@@ -84,8 +110,8 @@ export type usersReducerType =
     | toggleIsFetchingType
     | followingInProgressType
 
-export type followACType = ReturnType<typeof follow>
-export type unfollowACType = ReturnType<typeof unfollow>
+export type followACType = ReturnType<typeof followSuccess>
+export type unfollowACType = ReturnType<typeof unfollowSuccess>
 export type setUsersType = ReturnType<typeof setUsers>
 export type setCurrentPageType = ReturnType<typeof setCurrentPage>
 export type setTotalUsersCountType = ReturnType<typeof setTotalUsersCount>
@@ -93,7 +119,7 @@ export type toggleIsFetchingType = ReturnType<typeof toggleIsFetching>
 export type followingInProgressType = ReturnType<typeof toggleFollowingProgress>
 
 
-export const follow = (userId: number) => {
+export const followSuccess = (userId: number) => {
     return {
         type: 'FOLLOW',
         payload: {
@@ -102,7 +128,7 @@ export const follow = (userId: number) => {
     } as const
 }
 
-export const unfollow = (userId: number) => {
+export const unfollowSuccess = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         payload: {
