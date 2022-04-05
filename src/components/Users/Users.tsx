@@ -13,7 +13,6 @@ type UsersType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void
-    toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 const Users = (props: UsersType) => {
@@ -56,13 +55,17 @@ const Users = (props: UsersType) => {
             </span>
                 <div className={styles.btnBlock}>
                     {u.followed
-                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                        ? <button disabled={props.followingInProgress
+                            .some(id => id === u.id)} onClick={() => {
                             props.unfollow(u.id)
-                        }}>Unfollow</button>
+                        }
+                        }>Unfollow</button>
 
-                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                        : <button disabled={props.followingInProgress
+                            .some(id => id === u.id)} onClick={() => {
                             props.follow(u.id);
-                        }}>Follow</button>}
+                        }
+                        }>Follow</button>}
                 </div>
             </span>
                 </div>)}
