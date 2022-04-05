@@ -1,3 +1,6 @@
+import {userAPI} from "../api/api";
+import {Dispatch} from "redux";
+
 export type UserType = {
     id: number
     photos: {
@@ -55,6 +58,19 @@ export const userReducer = (state: initialStateType = initialState, action: user
             }
         default:
             return state;
+    }
+}
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => {
+    return (dispatch: Dispatch<usersReducerType>) => {
+        dispatch(toggleIsFetching(true));
+
+        userAPI.getUsers(currentPage, pageSize).then(
+            data => {
+                dispatch(toggleIsFetching(false));
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsersCount(data.totalCount));
+            });
     }
 }
 
