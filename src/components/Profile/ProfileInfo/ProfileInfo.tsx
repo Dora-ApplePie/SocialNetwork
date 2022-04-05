@@ -13,7 +13,7 @@ export const ProfileInfo = (props: ProfileProps) => {
     return (
         <div>
             <div className={styles.main}>
-                <img className={styles.imgProfile} src={props.profile.photos.large}/>
+                <img className={styles.imgProfile} src={props.profile.photos.large} alt={"large pic"}/>
                 <div className={styles.description}>
                     <div>{props.profile.fullName}</div>
                     <div>{props.profile.aboutMe}</div>
