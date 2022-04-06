@@ -23,11 +23,13 @@ export const userAPI = {
         return instance.post(`follow/${userId}`);
     },
 
-    getAuth() {
+    getUserProfile(userId: string) {
+        return instance.get(`profile/` + userId)
+    },
+}
+
+export const authAPI = {
+    me() {
         return instance.get(`auth/me`);
     },
-
-    setUserProfile(userId: string) {
-        return instance.get(`profile/` + userId)
-    }
 }

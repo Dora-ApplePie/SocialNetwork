@@ -71,9 +71,9 @@ export const setUserProfileData = (userId: string) => {
         if (!userId) {
             userId = "21450";
         }
-        userAPI.setUserProfile(userId)
+        userAPI.getUserProfile(userId)
             .then(response => {
-                dispatch(setUserProfile(response.data));
+                dispatch(setUserProfileAC(response.data));
             });
     }
 }
@@ -83,7 +83,7 @@ export type profileReducerType = addPostACType | updTextPostACType | setUserProf
 
 export type addPostACType = ReturnType<typeof addPostAC>
 export type updTextPostACType = ReturnType<typeof updTextPostAC>
-export type setUserProfileType = ReturnType<typeof setUserProfile>
+export type setUserProfileType = ReturnType<typeof setUserProfileAC>
 
 export const addPostAC = () => {
     return {
@@ -98,7 +98,7 @@ export const updTextPostAC = (newText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: any) => {
+export const setUserProfileAC = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE',
         payload: {
