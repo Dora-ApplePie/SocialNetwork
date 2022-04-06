@@ -23,7 +23,7 @@ export const userAPI = {
         return instance.post(`follow/${userId}`);
     },
 
-    getUserProfile(userId: string) {
+    getProfile(userId: string) {
         return instance.get(`profile/` + userId)
     },
 }

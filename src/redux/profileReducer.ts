@@ -66,12 +66,9 @@ export const profileReducer = (state = initialState, action: profileReducerType)
     }
 }
 
-export const setUserProfileData = (userId: string) => {
+export const getUserProfile = (userId: string) => {
     return (dispatch: Dispatch<profileReducerType>) => {
-        if (!userId) {
-            userId = "21450";
-        }
-        userAPI.getUserProfile(userId)
+        userAPI.getProfile(userId)
             .then(response => {
                 dispatch(setUserProfileAC(response.data));
             });
@@ -98,7 +95,7 @@ export const updTextPostAC = (newText: string) => {
     } as const
 }
 
-export const setUserProfileAC = (profile: any) => {
+const setUserProfileAC = (profile: any) => {
     return {
         type: 'SET-USER-PROFILE',
         payload: {
