@@ -21,7 +21,6 @@ type NavbarType = {
 type DialogPageType = {
     dialogs: Array<DialogType>
     messages: Array<MessageType>
-    newMessageBody: string
 }
 
 type DialogType = {
@@ -114,7 +113,6 @@ let store: StoreType = {
                 {id: 4, message: 'Hola, como estas?'},
                 {id: 5, message: 'Good evening, Ms. Dark'}
             ],
-            newMessageBody: ""
         },
 
         sidebar: {},
