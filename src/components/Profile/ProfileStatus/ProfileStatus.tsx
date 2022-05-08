@@ -4,6 +4,7 @@ import styles from './ProfileStatus.module.css'
 
 type PropsType ={
     status: string
+    updateProfileStatus: (status: string) => void
 }
 
 class ProfileStatus extends React.Component<PropsType> {
@@ -11,15 +12,16 @@ class ProfileStatus extends React.Component<PropsType> {
         editMode: false
     }
 
-    activateEditMode(){
+    activateEditMode = () =>{
         this.setState({
             editMode: true
-        })
+        });
     }
-    disActivateEditMode(){
+    disActivateEditMode = () =>{
         this.setState({
             editMode: false
-        })
+        });
+        this.props.updateProfileStatus('I love React JS');
     }
 
     render() {
@@ -27,12 +29,12 @@ class ProfileStatus extends React.Component<PropsType> {
             <div>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activateEditMode.bind(this)}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
                 </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.disActivateEditMode.bind(this)} value={this.props.status}/>
+                        <input autoFocus={true} onBlur={this.disActivateEditMode} value={this.props.status}/>
                     </div>
                 }
             </div>)

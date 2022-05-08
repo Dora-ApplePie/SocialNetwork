@@ -8,6 +8,12 @@ const instance = axios.create({
     },
 });
 
+type ResponseType = {
+    resultCode: number
+    messages: [string],
+    data: {}
+}
+
 export const userAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`,
@@ -24,8 +30,24 @@ export const userAPI = {
     },
 
     getProfile(userId: string) {
+        //backward compatibility
+        console.warn('Obsolete method. Please profileAPI obj')
+        return profileAPI.getProfile(userId)
+    },
+}
+
+export const profileAPI = {
+
+    getProfile(userId: string) {
         return instance.get(`profile/` + userId)
     },
+
+    getStatus(userId: string) {
+        return instance.get(`/profile/status/${userId}`)
+    },
+    updateStatus(status: string) {
+        return instance.put<ResponseType>(`/profile/status/`, {status: status})
+    }
 }
 
 export const authAPI = {

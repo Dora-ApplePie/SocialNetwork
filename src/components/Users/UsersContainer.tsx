@@ -38,7 +38,8 @@ class UsersContainer extends React.Component<DispatchPropsType> {
 
     onPageChanged = (pageNumber: number) => {
         this.props.getUsers(pageNumber, this.props.pageSize);
-        //!!!!!!!????? this.props.setCurrentPage(pageNumber);
+        //transfer to the thunk in profileReducer!!!!!!!?????
+        // this.props.setCurrentPage(pageNumber);
         // this.props.toggleIsFetching(true);
         // userAPI.getUsers(pageNumber, this.props.pageSize).then(
         //     data => {

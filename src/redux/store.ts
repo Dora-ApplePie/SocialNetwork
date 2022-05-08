@@ -38,6 +38,7 @@ type ProfilePageType = {
     posts: Array<PostType>
     newPostText: string
     profile: any
+    status: string
 }
 
 type PostType = {
@@ -78,23 +79,24 @@ let store: StoreType = {
                 {
                     id: 2,
                     img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-                    text: "It's my firs program!",
+                    text: "It's my program!",
                     LikeCount: 40,
                 },
                 {
                     id: 3,
                     img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-                    text: "Hi, bitch!",
+                    text: "Hi, friends!",
                     LikeCount: 1400,
                 },
                 {
                     id: 4,
                     img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-                    text: "VK is the boolshit",
+                    text: "Have a nice day!",
                     LikeCount: 40000,
                 }],
             newPostText: '',
-            profile: null
+            profile: null,
+            status: ''
         },
         dialogPage: {
             dialogs: [

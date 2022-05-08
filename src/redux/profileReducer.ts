@@ -1,10 +1,11 @@
-import {userAPI} from "../api/api";
+import {profileAPI, userAPI} from "../api/api";
 import {Dispatch} from "redux";
 
 export type InitialStateType = {
     posts: Array<PostType>
     newPostText: string
     profile: any
+    status: string
 }
 
 export type PostType = {
@@ -25,23 +26,24 @@ let initialState: InitialStateType = {
         {
             id: 2,
             img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-            text: "It's my firs program!",
+            text: "It's my program!",
             LikeCount: 40,
         },
         {
             id: 3,
             img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-            text: "Hi, bitch!",
+            text: "Have a nice day!",
             LikeCount: 1400,
         },
         {
             id: 4,
             img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-            text: "VK is the boolshit",
+            text: "Hi, friends!",
             LikeCount: 40000,
         }],
     newPostText: '',
     profile: null,
+    status: '',
 }
 
 export const profileReducer = (state = initialState, action: profileReducerType): InitialStateType => {
@@ -61,6 +63,9 @@ export const profileReducer = (state = initialState, action: profileReducerType)
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
         }
+        case 'SET-STATUS': {
+            return {...state, status: action.payload.status}
+        }
         default:
             return state;
     }
@@ -75,12 +80,33 @@ export const getUserProfile = (userId: string) => {
     }
 }
 
+export const getProfileStatus = (userId: string) => {
+    return (dispatch: Dispatch<profileReducerType>) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setProfileStatusAC(response.data));
+            });
+    }
+}
+
+export const updateProfileStatus = (status: string) => {
+    return (dispatch: Dispatch<profileReducerType>) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+                    dispatch(setProfileStatusAC(status));
+                }
+            });
+    }
+}
+
 //автогенерация
-export type profileReducerType = addPostACType | updTextPostACType | setUserProfileType
+export type profileReducerType = addPostACType | updTextPostACType | setUserProfileType | setProfileStatusType
 
 export type addPostACType = ReturnType<typeof addPostAC>
 export type updTextPostACType = ReturnType<typeof updTextPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfileAC>
+export type setProfileStatusType = ReturnType<typeof setProfileStatusAC>
 
 export const addPostAC = () => {
     return {
@@ -100,6 +126,15 @@ const setUserProfileAC = (profile: any) => {
         type: 'SET-USER-PROFILE',
         payload: {
             profile
+        }
+    } as const
+}
+
+const setProfileStatusAC = (status: string) => {
+    return {
+        type: 'SET-STATUS',
+        payload: {
+            status
         }
     } as const
 }
