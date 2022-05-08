@@ -3,7 +3,6 @@ import {Dispatch} from "redux";
 
 export type InitialStateType = {
     posts: Array<PostType>
-    newPostText: string
     profile: any
     status: string
 }
@@ -41,7 +40,6 @@ let initialState: InitialStateType = {
             text: "Hi, friends!",
             LikeCount: 40000,
         }],
-    newPostText: '',
     profile: null,
     status: '',
 }
@@ -52,13 +50,10 @@ export const profileReducer = (state = initialState, action: profileReducerType)
             let NewPost: PostType = {
                 id: new Date().getTime(),
                 img: 'https://n1s2.starhit.ru/6a/46/ae/6a46aeed947a183d67d1bc48211151bf/480x496_0_2bbde84177c9ff1c2299a26a0f69f69c@480x496_0xac120003_4430520541578509619.jpg',
-                text: state.newPostText,
+                text: action.newPostText,
                 LikeCount: 0,
             };
-            return {...state, posts: [...state.posts, NewPost], newPostText: ''}
-        }
-        case "UPDATE-NEW-POST-TEXT": {
-            return {...state, newPostText: action.newText}
+            return {...state, posts: [...state.posts, NewPost]}
         }
         case "SET-USER-PROFILE": {
             return {...state, profile: action.payload.profile}
@@ -101,25 +96,18 @@ export const updateProfileStatus = (status: string) => {
 }
 
 //автогенерация
-export type profileReducerType = addPostACType | updTextPostACType | setUserProfileType | setProfileStatusType
+export type profileReducerType = addPostACType | setUserProfileType | setProfileStatusType
 
 export type addPostACType = ReturnType<typeof addPostAC>
-export type updTextPostACType = ReturnType<typeof updTextPostAC>
 export type setUserProfileType = ReturnType<typeof setUserProfileAC>
 export type setProfileStatusType = ReturnType<typeof setProfileStatusAC>
 
-export const addPostAC = () => {
+export const addPostAC = (newPostText: string) => {
     return {
-        type: 'ADD-POST'
+        type: 'ADD-POST', newPostText
     } as const
 }
 
-export const updTextPostAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}
 
 const setUserProfileAC = (profile: any) => {
     return {

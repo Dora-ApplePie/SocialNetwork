@@ -35,7 +35,6 @@ type MessageType = {
 
 type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
     profile: any
     status: string
 }
@@ -93,7 +92,6 @@ let store: StoreType = {
                     text: "Have a nice day!",
                     LikeCount: 40000,
                 }],
-            newPostText: '',
             profile: null,
             status: ''
         },

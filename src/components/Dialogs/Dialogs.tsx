@@ -15,7 +15,6 @@ const Dialogs = (props: DialogsPropsType) => {
     //let sendMessage = React.createRef<HTMLTextAreaElement>(); по максимуму не используем
 
     let addNewMessage = (values: FormDataType) =>{
-        debugger;
         props.sendMessage(values.newMessageBody);
     };
 
