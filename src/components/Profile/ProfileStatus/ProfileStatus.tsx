@@ -8,8 +8,10 @@ type PropsType ={
 }
 
 class ProfileStatus extends React.Component<PropsType> {
+
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () =>{
@@ -21,7 +23,13 @@ class ProfileStatus extends React.Component<PropsType> {
         this.setState({
             editMode: false
         });
-        this.props.updateProfileStatus('I love React JS');
+        this.props.updateProfileStatus(this.state.status);
+    }
+
+    onStatusChange = (e: React.FormEvent<HTMLInputElement>) => {
+       this.setState({
+           status: e.currentTarget.value
+       })
     }
 
     render() {
@@ -29,12 +37,12 @@ class ProfileStatus extends React.Component<PropsType> {
             <div>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "No status"}</span>
                 </div>
                 }
                 {this.state.editMode &&
                     <div>
-                        <input autoFocus={true} onBlur={this.disActivateEditMode} value={this.props.status}/>
+                        <input onChange={this.onStatusChange} autoFocus={true} onBlur={this.disActivateEditMode} value={this.state.status}/>
                     </div>
                 }
             </div>)
