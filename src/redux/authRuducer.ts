@@ -20,7 +20,7 @@ export const authReducer = (state: initialStateType = initialState, action: auth
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true
             }
         default:
@@ -34,24 +34,44 @@ export const getAuthUserData = () => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                     let {id, login, email} = response.data.data;
-                    dispatch(setAuthUserData(id, login, email));
+                    dispatch(setAuthUserData(id, login, email, true));
                 }
             })
     }
-}
+};
+
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<authReducerType>) => {
+        authAPI.login(email, password, rememberMe)
+            .then(response => {
+                if (response.data.resultCode === 0) {
+
+                }
+            })
+    };
+
+export const logoutThunkCreator = () => (dispatch: Dispatch<authReducerType>) => {
+    authAPI.logout()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setAuthUserData(0, '', '', false));
+            }
+        })
+};
+
 
 //автогенерация
 export type authReducerType = setUserDataACType
 
 export type setUserDataACType = ReturnType<typeof setAuthUserData>
 
-const setAuthUserData = (id: number, email: string, login: string) => {
+const setAuthUserData = (id: number, email: string, login: string, isAuth: boolean) => {
     return {
         type: 'SET-USER-DATA',
-        data: {
+        payload: {
             id,
             email,
             login,
+            isAuth,
         }
     } as const
 }
