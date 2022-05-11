@@ -1,5 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
+import {ThunkAction} from "redux-thunk";
+import {AppActionsType, AppStateType} from "./redux-store";
 
 export type initialStateType = {
     id: number,
@@ -40,14 +42,14 @@ export const getAuthUserData = () => {
     }
 };
 
-export const loginThunkCreator = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<authReducerType>) => {
-        authAPI.login(email, password, rememberMe)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-
-                }
-            })
-    };
+export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): ThunkAction<void, AppStateType, unknown, AppActionsType> => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthUserData());
+            }
+        })
+};
 
 export const logoutThunkCreator = () => (dispatch: Dispatch<authReducerType>) => {
     authAPI.logout()
