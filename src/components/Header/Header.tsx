@@ -5,6 +5,7 @@ import style from "./Header.module.css"
 type HeaderPropsType = {
     isAuth: boolean,
     login: string,
+    logoutTC: () => void
 }
 
 export const Header = (props: HeaderPropsType) => {
@@ -14,7 +15,7 @@ export const Header = (props: HeaderPropsType) => {
                  src={"https://pngimg.com/uploads/eagle/eagle_PNG1232.png"}/>
             <div className={style.loginBlock}>
                 {props.isAuth
-                    ? props.login
+                    ? <div>{props.login} - <button onClick={props.logoutTC}>Log out</button></div>
                     : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
