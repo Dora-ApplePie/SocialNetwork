@@ -2,16 +2,17 @@ import React from 'react';
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {
-    UserType, setCurrentPage,
+    setCurrentPage,
     toggleFollowingProgress, getUsersThunkCreator, follow, unfollow
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {WithAuthRedirect} from "../../HOC/WithAuthRedirect";
+import {UserDataType} from "../../api/api";
 
 type MapStateToPropsType = {
-    users: UserType[]
+    users: UserDataType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number

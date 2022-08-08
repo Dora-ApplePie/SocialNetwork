@@ -8,16 +8,14 @@ const instance = axios.create({
     },
 });
 
-type ResponseType = {
-    resultCode: number
-    messages: [string],
-    data: {}
-}
-
 export const userAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`,
-        )
+        return instance.get<GetUsersResponseType>(`users`, {
+            params: {
+                count: pageSize,
+                page: currentPage
+            }
+        })
             .then(response => response.data);
     },
 
@@ -29,7 +27,7 @@ export const userAPI = {
         return instance.post(`follow/${userId}`);
     },
 
-    getProfile(userId: string) {
+    getProfile(userId: number) {
         //backward compatibility
         console.warn('Obsolete method. Please profileAPI obj')
         return profileAPI.getProfile(userId)
@@ -38,12 +36,12 @@ export const userAPI = {
 
 export const profileAPI = {
 
-    getProfile(userId: string) {
-        return instance.get(`profile/` + userId)
+    getProfile(userId: number) {
+        return instance.get<UserProfileType>(`profile/` + userId)
     },
 
     getStatus(userId: string) {
-        return instance.get(`/profile/status/${userId}`)
+        return instance.get<string>(`/profile/status/${userId}`)
     },
     updateStatus(status: string) {
         return instance.put<ResponseType>(`/profile/status/`, {status: status})
@@ -52,12 +50,67 @@ export const profileAPI = {
 
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`);
+        return instance.get<ResponseType<AuthUserDataType>>(`auth/me`);
     },
     login(email: string, password: string, rememberMe: boolean = false) {
-        return instance.post(`auth/login`, {email, password, rememberMe});
+        return instance.post<ResponseType<{ userId: number }>>(`auth/login`, {email, password, rememberMe});
     },
     logout() {
-        return instance.delete(`auth/login`);
+        return instance.delete<ResponseType>(`auth/login`);
     },
+}
+
+//types
+
+export type GetUsersResponseType = {
+    error: null | string
+    items: Array<UserDataType>
+    totalCount: number
+}
+
+export type UserDataType = {
+    name: string
+    id: number
+    photos: PhotosUserType
+    status: null | string
+    followed: boolean
+}
+
+export type PhotosUserType = {
+    small: null | string
+    large: null | string
+}
+
+
+export type ResponseType<D = {}> = {
+    data: D
+    messages: Array<any>
+    resultCode: number
+}
+
+export type AuthUserDataType = {
+    id: number
+    email: string
+    login: string
+};
+
+export type UserProfileType = {
+    aboutMe: string | null
+    contacts: ContactsUserType
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string | null
+    userId: number,
+    photos: PhotosUserType
+}
+
+export type ContactsUserType = {
+    facebook: string | null
+    website: string | null
+    vk: string | null
+    twitter: string | null
+    instagram: string | null
+    youtube: string | null
+    github: string | null
+    mainLink: string | null
 }

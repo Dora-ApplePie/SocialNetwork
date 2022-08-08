@@ -66,7 +66,7 @@ export const profileReducer = (state = initialState, action: profileReducerType)
     }
 }
 
-export const getUserProfile = (userId: string) => {
+export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch<profileReducerType>) => {
         userAPI.getProfile(userId)
             .then(response => {

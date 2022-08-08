@@ -1,11 +1,11 @@
 import React from 'react'
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/img/persons-img.png";
-import {UserType} from "../../redux/usersReducer";
 import {NavLink} from 'react-router-dom';
+import {UserDataType} from "../../api/api";
 
 type UsersType = {
-    users: UserType[]
+    users: UserDataType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
