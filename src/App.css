@@ -1,24 +1,11 @@
-html {
-    background: #000;
-}
 .app-wrapper {
-    background: #000;
-    width: 1000px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-areas: "h h"
-    "n c ";
-    grid-template-rows: 80px 1fr;
-    grid-template-columns: 2fr 10fr;
-    grid-gap: 5px;
+  margin: 0 auto;
+  width: 1200px;
+  display: grid;
+  grid-template-areas:
+"h h"
+"n c";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 2fr 10fr;
+  grid-gap: 10px;
 }
-
-.app-wrapper-content {
-    grid-area: c;
-    background-color: #000000;
-    color: aliceblue;
-}
-
-
-
-

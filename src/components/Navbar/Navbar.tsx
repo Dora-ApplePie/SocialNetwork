@@ -1,38 +1,26 @@
-import React from "react";
-import style from "./Navbar.module.css"
-import {NavLink} from 'react-router-dom';
+import React from 'react'
+import s from './Navbar.module.css'
+import {NavLink} from 'react-router-dom'
+import {useAppSelector} from '../../hooks/hooks'
+import {getId} from '../../redux/authSelectors'
 
-
-export const Navbar: React.FC = () => {
-
-const navbar = {
-    profileLink: 'Profile',
-    messagesLink: 'Messages',
-    newsLink: 'News',
-    musicLink: 'Music',
-    settingsLink: 'Settings',
-    usersLink: 'Users',
+type ActionType = {
+    [key: string]: boolean
 }
 
-    return (<nav className={style.nav}>
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/profile'}>{navbar.profileLink}</NavLink>
-        </div>
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/dialogs'}>{navbar.messagesLink}</NavLink>
-        </div>
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/users'}>{navbar.usersLink}</NavLink>
-        </div>
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/feed'}>{navbar.newsLink}</NavLink>
-        </div>
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/music'}>{navbar.musicLink}</NavLink>
-        </div>
+export const Navbar = () => {
+    const authUserId = useAppSelector(getId)
 
-        <div className={style.item}>
-            <NavLink activeClassName={style.active} to={'/settings'}>{navbar.settingsLink}</NavLink>
-        </div>
-    </nav>)
+    const setAction = ({isActive}: ActionType) => isActive ? s.active : s.item
+
+    return (
+        <nav className={s.nav}>
+            <div><NavLink to={'/profile/' + authUserId} className={setAction}>Profiles</NavLink></div>
+            <div><NavLink to="/dialogs" className={setAction}>Messages</NavLink></div>
+            <div><NavLink to="/users" className={setAction}>Users</NavLink></div>
+            <div><NavLink to="/news" className={setAction}>News</NavLink></div>
+            <div><NavLink to="/music" className={setAction}>Music</NavLink></div>
+            <div><NavLink to="/setting" className={setAction}>Settings</NavLink></div>
+        </nav>
+    )
 }

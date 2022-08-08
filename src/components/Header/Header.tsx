@@ -1,24 +1,30 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import style from "./Header.module.css"
+import React from 'react'
+import styles from './Header.module.css'
+import logo from '../../assets/images/HeadLogo.png'
+import {NavLink} from 'react-router-dom'
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks'
+import {logout} from '../../redux/authReduser'
+import {getIsAuth, getLogin} from '../../redux/authSelectors'
 
-type HeaderPropsType = {
-    isAuth: boolean,
-    login: string,
-    logoutTC: () => void
-}
+export const Header = () => {
+    const dispatch = useAppDispatch()
 
-export const Header = (props: HeaderPropsType) => {
+    const login = useAppSelector(getLogin)
+    const isAuth = useAppSelector(getIsAuth)
+
+    const onClickLogoutButton = () => {
+        dispatch(logout())
+    }
+
     return (
-        <header className={style.header}>
-            <img alt={'Logo'}
-                 src={"https://pngimg.com/uploads/eagle/eagle_PNG1232.png"}/>
-            <div className={style.loginBlock}>
-                {props.isAuth
-                    ? <div>{props.login} - <button onClick={props.logoutTC}>Log out</button></div>
-                    : <NavLink to={'/login'}>Login</NavLink>
-                }
+        <header className={styles.header}>
+            <img
+                src={logo} alt="logo"/>
+
+            <div className={styles.loginBlock}>
+                {isAuth ?
+                    <div className={styles.item}>{login} - <button onClick={onClickLogoutButton}>Logout</button></div>
+                    : <NavLink to={'/login'} className={styles.item}>Login</NavLink>}
             </div>
-        </header>
-    )
+        </header>)
 }

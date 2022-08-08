@@ -1,24 +1,30 @@
-import React from 'react'
-import styles from './FormsControls.module.css';
+import React, {HTMLInputTypeAttribute} from 'react'
+import {WrappedFieldInputProps, WrappedFieldMetaProps} from 'redux-form/lib/Field'
 
-export const FormControl = ({input, meta, child, ...props}: any) => {
-    const hasError = meta.touched && meta.error;
+type FormsControls = {
+    input: WrappedFieldInputProps
+    meta: WrappedFieldMetaProps
+    placeholder?: string
+    type?: HTMLInputTypeAttribute
+    autoFocus?: boolean
+}
+
+export const Input: React.FC<FormsControls> = (
+    {input, meta: {touched, error}, type, placeholder, autoFocus}) => {
     return (
-        <div className={styles.formControl + ' ' + (hasError ? styles.error : '')}>
-            <div>
-                {props.children}
-            </div>
-            {hasError && <span>{meta.error}</span>}
+        <div>
+            <input {...input} type={type} placeholder={placeholder} autoFocus={autoFocus}/>
+            {touched && error && <span>{error}</span>}
         </div>
     )
 }
 
-export const Input = (props: any) => { //пропсы теперь содержат все кроме инпут и мета
-    const {input, meta, child, ...restProps} = props;
-    return <FormControl {...props}><input {...input} {...restProps}/></FormControl>
-}
-
-export const Textarea = (props: any) => { //пропсы теперь содержат все кроме инпут и мета
-    const {input, meta, child, ...restProps} = props;
-    return <FormControl {...props}><textarea {...input} {...restProps}/></FormControl>
+export const Textarea: React.FC<FormsControls> = (
+    {input, meta: {touched, error}, placeholder}) => {
+    return (
+        <div>
+            <textarea {...input} placeholder={placeholder}/>
+            {touched && error && <span>{error}</span>}
+        </div>
+    )
 }

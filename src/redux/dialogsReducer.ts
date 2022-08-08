@@ -1,57 +1,49 @@
-export type initialStateType = {
-    dialogs: Array<DialogType>
-    messages: Array<MessageType>
-}
+import {v1} from 'uuid';
+
+export const SEND_MESSAGE = 'SEND_MESSAGE';
 
 export type DialogType = {
-    id: number
+    id: string
     name: string
 }
-
 export type MessageType = {
-    id: number
+    id: string
     message: string
 }
+export type initialStateType = typeof initialState
 
-let initialState: initialStateType = {
+export type SendNewMessageBodyACType = ReturnType<typeof sendNewMessageBodyAC>
+
+export type DialogsReducerAT = SendNewMessageBodyACType
+
+let initialState = {
     dialogs: [
-        {id: 1, name: "Patricia"},
-        {id: 2, name: "Helga"},
-        {id: 3, name: "Ronda"},
-        {id: 4, name: "Jessica"},
-        {id: 5, name: "Tatiana"},
-        {id: 6, name: "Doctor"}
-    ],
+        {id: v1(), name: 'Sabrina'},
+        {id: v1(), name: 'Patricia'},
+        {id: v1(), name: 'Jessica'},
+        {id: v1(), name: 'Ronda'},
+        {id: v1(), name: 'Kevin'}
+    ] as Array<DialogType>,
     messages: [
-        {id: 1, message: 'Hello, how is your life, baby?'},
-        {id: 2, message: "Yo! What's up dude?"},
-        {id: 3, message: 'This is the reason of the night...ooohh'},
-        {id: 4, message: 'Hola, como estas?'},
-        {id: 5, message: 'Good evening, Ms. Dark'}
-    ],
+        {id: v1(), message: "Yo! What's up dude?"},
+        {id: v1(), message: 'Hola, como estas?'},
+        {id: v1(), message: 'Good evening!'}
+    ] as Array<MessageType>,
 }
 
-export const dialogsReducer = (state = initialState, action: DialogsReducerType): initialStateType => {
-    switch (action.type) {
-        case 'SEND-MSG ':
-            let body = action.newMessageBody;
-            return { ...state, messages: [...state.messages, {id: 6, message: body}]};
-        default:
-            return state;
+export const dialogsReducer =
+    (state: initialStateType = initialState, action: DialogsReducerAT): initialStateType => {
+        switch (action.type) {
+            case SEND_MESSAGE:
+                let newMessage = {id: v1(), message: action.newMessageBody}
+                return {
+                    ...state,
+                    messages: [...state.messages, newMessage],
+
+                }
+            default:
+                return state
+        }
     }
-}
 
-
-
-export const sendMessageAC = (newMessageBody: string) => {
-    return {
-        type: 'SEND-MSG ',
-        newMessageBody
-    } as const
-}
-
-
-
-type sendMessageType = ReturnType<typeof sendMessageAC>
-
-export type DialogsReducerType = sendMessageType
+export const sendNewMessageBodyAC = (newMessageBody: string) => ({type: SEND_MESSAGE, newMessageBody} as const)
